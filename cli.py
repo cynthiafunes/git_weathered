@@ -2,6 +2,7 @@ import argparse
 import json
 import csv
 import sys
+from api import obtener_datos_clima
 
 def main():
     parser = argparse.ArgumentParser(description="Cli para la obtencion de datos climaticos")
@@ -14,21 +15,15 @@ def main():
     formato_salida = args.formato
     
     print(f"Obtener el clima de {ciudad} en {formato_salida}")
-    
-    # despues voy a reemplazar esto
-    data = {
-        "ciudad": ciudad,
-        "temperatura": 25,
-        "condicion_actual": "Soleado",
-        "humedad": 60
-    }
+
+    datos_clima = obtener_datos_clima(ciudad)
     
     if formato_salida == "json":
-        print(json.dumps(data, indent=2))
+        print(json.dumps(datos_clima, indent=2))
     else:  
-        writer = csv.DictWriter(sys.stdout, fieldnames=data.keys())
+        writer = csv.DictWriter(sys.stdout, fieldnames=datos_clima.keys())
         writer.writeheader()
-        writer.writerow(data)
+        writer.writerow(datos_clima)
 
 if __name__ == "__main__":
     main()
