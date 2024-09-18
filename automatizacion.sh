@@ -10,7 +10,9 @@ pip install -r requirements.txt
 
 # 3. Ejecutar la aplicación CLI
 echo "Ejecutando la aplicacion CLI..."
-python cli.py Madrid json
+python cli.py edinburgh json
 
 # 4. Mensaje final
 echo "Ejecución completada con éxito."
+
+#./automatizacion.sh

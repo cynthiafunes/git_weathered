@@ -12,9 +12,6 @@ def obtener_datos_clima(ciudad):
         if respuesta.status_code == 200:
             json_data = respuesta.json()
 
-            if "error" in json_data:
-                raise Exception(f"Ubicacion no encontrada: {ciudad}")
-
             location = json_data["location"]
             c = json_data["current"]
 
@@ -28,6 +25,9 @@ def obtener_datos_clima(ciudad):
                 "humedad": c["humidity"],
                 "fecha_actualizacion": c["last_updated"],
             }
+
+        elif respuesta.status_code == 400:
+            raise Exception(f"Ubicacion no encontrada: {ciudad}")
         else:
             raise Exception(f"Error: {respuesta.status_code}")
 
